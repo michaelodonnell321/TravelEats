@@ -12,10 +12,20 @@ class RestaurantList extends Component {
         })
     }
 
+    restaurantClickHandler = (id) => {
+        console.log('in restaurant click handler');
+        console.log('id is', id)
+        this.props.dispatch({
+            type: 'GET_DETAILS',
+            payload: id
+        })
+        this.props.history.push(`/details/`)
+    }
+
     render() {
         let restaurantArray = this.props.reduxStore.restaurantReducer.map(restaurant => {
             return (
-                <div>
+                <div className="restaurantListing" key={restaurant.id} onClick={() => this.restaurantClickHandler(restaurant.id)}>
                     <h4>{restaurant.name}</h4>
                     <img src={restaurant.photo_url} />
                     <p>{restaurant.type}</p>
