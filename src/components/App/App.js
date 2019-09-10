@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -16,12 +16,14 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
+import RestaurantForm from '../RestaurantForm/RestaurantForm';
+import RestaurantList from '../RestaurantList/RestaurantList';
 
 import './App.css';
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
@@ -55,13 +57,24 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
+            <ProtectedRoute
+              exact
+              path="/add"
+              component={RestaurantForm}
+            />
+            <ProtectedRoute
+              exact
+              path="/list"
+              component={RestaurantList}
+              />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 export default connect()(App);
