@@ -17,6 +17,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import RestaurantForm from '../RestaurantForm/RestaurantForm';
+import RestaurantList from '../RestaurantList/RestaurantList';
 
 import './App.css';
 
@@ -61,10 +62,15 @@ class App extends Component {
               path="/add"
               component={RestaurantForm}
             />
+            <ProtectedRoute
+              exact
+              path="/list"
+              component={RestaurantList}
+              />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     )
