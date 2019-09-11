@@ -6,7 +6,7 @@ function* addRestaurant(action) {
     try {
         console.log(action.payload)
         //sends new restaurant info to server
-        axios.post('/api/restaurant', action.payload)
+        yield axios.post('/api/restaurant', action.payload)
     } catch (error) {
         console.log('error with add restaurant', error)
     }
@@ -27,8 +27,8 @@ function* fetchRestaurants(action) {
     }
 }
 
-function *restaurantSaga() {
-    yield takeEvery ('ADD_RESTAURANT', addRestaurant)
+function* restaurantSaga() {
+    yield takeEvery('ADD_RESTAURANT', addRestaurant)
     yield takeEvery('FETCH_RESTAURANTS', fetchRestaurants)
 
 }
