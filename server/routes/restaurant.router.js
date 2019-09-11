@@ -48,11 +48,19 @@ router.post('/', (req, res) => {
     console.log('is authenticated?', req.isAuthenticated());
     console.log('user', req.user);
 
-    // let queryText = `
-    // INSERT into "restaurants" ("name", "type", "user_id", "address", "city", "state", "zip", "country", "photo_url")
-    // values
-    // `
-    res.sendStatus(200);
+    let queryText = `
+    INSERT into "restaurants" ("name", "type", "user_id", "address", "city", "state", "zip", "country", "photo_url")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+    `;
+    pool.query(queryText, [req.body.name, req.body.type, req.user.id, req.body.address, req.body.city, req.body.state, req.body.zip,
+    req.body.country, req.body.photo_url])
+    .then((response) => {
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log('error in POST restaurant', error);
+        res.sendStatus(500);
+    })
 });
 
 module.exports = router;

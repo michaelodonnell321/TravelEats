@@ -7,6 +7,9 @@ function* addRestaurant(action) {
         console.log(action.payload)
         //sends new restaurant info to server
         yield axios.post('/api/restaurant', action.payload)
+        yield put ({
+            type: 'SET_RESTAURANTS'
+        })
     } catch (error) {
         console.log('error with add restaurant', error)
     }
