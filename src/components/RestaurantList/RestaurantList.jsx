@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import './RestaurantList.css'
 
 class RestaurantList extends Component {
     componentDidMount() {
@@ -19,7 +20,7 @@ class RestaurantList extends Component {
             type: 'GET_DETAILS',
             payload: id
         })
-        this.props.history.push(`/details/`)
+        this.props.history.push(`/details/${id}`)
     }
 
     render() {
@@ -27,7 +28,7 @@ class RestaurantList extends Component {
             return (
                 <div className="restaurantListing" key={restaurant.id} onClick={() => this.restaurantClickHandler(restaurant.id)}>
                     <h4>{restaurant.name}</h4>
-                    <img src={restaurant.photo_url} />
+                    <img className="listingImage" src={restaurant.photo_url} />
                     <p>{restaurant.type}</p>
                     <p>{restaurant.address}</p>
                     <p>{restaurant.city}</p>

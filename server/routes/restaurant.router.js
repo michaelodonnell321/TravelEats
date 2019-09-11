@@ -21,11 +21,11 @@ router.get('/:id', (req, res) => {
     console.log('req.params is', req.params);
     let detailsID = req.params.id;
     const queryText = `
-    SELECT "user".username, "comments".user_id, "comments".restaurant_id, "comments".comment, "comments".date, "comments".recommended,
+    SELECT "user".username, "comments".id as "comment_id", "comments".user_id, "comments".restaurant_id, "comments".comment, "comments".date, "comments".recommended,
     "restaurants".id, "restaurants".name, "restaurants".type, "restaurants".address, "restaurants".city,
     "restaurants".state, "restaurants".zip, "restaurants".country, "restaurants".photo_url, "restaurants".closed from "restaurants"
     JOIN "comments" ON "restaurants".id = "comments".restaurant_id
-    JOIN "user" ON "restaurants".user_id = "user".id
+    JOIN "user" ON "comments".user_id = "user".id
     WHERE "restaurants".id = $1;
     `;
     pool.query(queryText, [detailsID])

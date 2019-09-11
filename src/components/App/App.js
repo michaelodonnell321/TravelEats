@@ -69,8 +69,7 @@ class App extends Component {
               component={RestaurantList}
               />
               <ProtectedRoute
-              exact
-              path="/details"
+              path="/details/:id"
               component={RestaurantDetails}
               />
             {/* If none of the other routes matched, we will show a 404. */}
