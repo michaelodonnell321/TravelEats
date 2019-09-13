@@ -23,7 +23,7 @@ class RestaurantDetails extends Component {
         commentBox: true,
         currentComment: '',
     }
-    
+
     componentDidMount() {
         console.log(this.props.match.params.id)
         console.log(this.props)
@@ -72,11 +72,19 @@ class RestaurantDetails extends Component {
     }
 
     deleteCommentClick = (id) => {
-        console.log('delete comment clicked id:', id)
+        console.log('id for delete comment payload is', id)
         this.props.dispatch({
             type: 'DELETE_COMMENT',
-            payload: id
+            payload: {
+                id: id,
+                detailsID : this.props.match.params.id
+            }
         })
+        swal(
+            <div>
+                <h1>Comment deleted!</h1>
+            </div>
+        )
     }
 
     render() {
@@ -84,14 +92,14 @@ class RestaurantDetails extends Component {
             return (
                 <div>
                     <div className="commentList" key={comment.comment_id}>
-                    <p>{comment.username} says: {comment.recommended}</p>
-                    <p>{comment.comment}</p>
+                        <p>{comment.username} says: {comment.recommended}</p>
+                        <p>{comment.comment}</p>
                     </div>
                     <div>
                         {this.props.user.id === comment.user_id &&
-                        <Button variant="outlined" onClick={() => this.editCommentClick(comment.comment_id)}>Edit Comment</Button>}
+                            <Button variant="outlined" onClick={() => this.editCommentClick(comment.comment_id)}>Edit Comment</Button>}
                         {this.props.user.id === comment.user_id &&
-                        <Button variant="outlined" onClick={() => this.deleteCommentClick(comment.comment_id)}>Delete Comment</Button>}
+                            <Button variant="outlined" onClick={() => this.deleteCommentClick(comment.comment_id)}>Delete Comment</Button>}
                     </div>
                 </div>
             )
@@ -105,18 +113,18 @@ class RestaurantDetails extends Component {
                 <p>{this.props.details[0].address} {this.props.details[0].city}, {this.props.details[0].state} {this.props.details[0].zip}
                 </p>
                 <div>
-                {this.state.commentBox ? (
-                <Button variant="outlined" onClick={() => this.handleCommentClick(this.props.details[0].id)}>Comment</Button>
-                ) : (
-                    <div>
-                <TextField
-                onChange={this.handleCommentChange}
-                placeholder="Comment!" />
-                <Button variant="outlined" onClick={() => this.handleCommentSubmit(this.props.details[0].id)}>Submit</Button>
+                    {this.state.commentBox ? (
+                        <Button variant="outlined" onClick={() => this.handleCommentClick(this.props.details[0].id)}>Comment</Button>
+                    ) : (
+                            <div>
+                                <TextField
+                                    onChange={this.handleCommentChange}
+                                    placeholder="Comment!" />
+                                <Button variant="outlined" onClick={() => this.handleCommentSubmit(this.props.details[0].id)}>Submit</Button>
+                            </div>
+                        )}
                 </div>
-                )}
-                </div>
-                <Button variant="outlined">Closed?</Button> 
+                <Button variant="outlined">Closed?</Button>
             </div>
 
         let name = this.props.details[0].name
