@@ -22,6 +22,9 @@ class RestaurantDetails extends Component {
     state = {
         commentBox: true,
         currentComment: '',
+        changedComment: '',
+        editComment: false,
+        commentEditID: 0,
     }
 
     componentDidMount() {
@@ -47,6 +50,9 @@ class RestaurantDetails extends Component {
     }
 
     handleCommentSubmit = (id) => {
+        this.setState({
+            editComment: !this.state.editComment
+        })
         console.log('comment submit clicked')
         this.props.dispatch({
             type: 'SUBMIT_COMMENT',
@@ -68,7 +74,10 @@ class RestaurantDetails extends Component {
     }
 
     editCommentClick = (id) => {
-        console.log('edit comment clicked id:', id)
+        this.setState({
+            editComment: true,
+            commentEditID: id
+        })
     }
 
     deleteCommentClick = (id) => {
@@ -77,12 +86,41 @@ class RestaurantDetails extends Component {
             type: 'DELETE_COMMENT',
             payload: {
                 id: id,
-                detailsID : this.props.match.params.id
+                detailsID: this.props.match.params.id
             }
         })
         swal(
             <div>
                 <h1>Comment deleted!</h1>
+            </div>
+        )
+    }
+
+    handleEditCommentChange = (event) => {
+        this.setState({
+            changedComment: event.target.value
+        })
+    }
+
+    handleEditCommentClick = (id) => {
+        console.log('edit comment clicked', this.state.editComment)
+        console.log('edit comment clicked id:', id)
+        console.log('edit comment', this.state)
+
+        this.props.dispatch({
+            type: 'EDIT_COMMENT',
+            payload: {
+                id: id,
+                detailsID: this.props.match.params.id,
+                changedComment: this.state.changedComment
+            }
+        })
+        this.setState({
+            editComment: !this.state.editComment,
+        })
+        swal(
+            <div>
+                <h1>Comment edited!</h1>
             </div>
         )
     }
@@ -100,6 +138,13 @@ class RestaurantDetails extends Component {
                             <Button variant="outlined" onClick={() => this.editCommentClick(comment.comment_id)}>Edit Comment</Button>}
                         {this.props.user.id === comment.user_id &&
                             <Button variant="outlined" onClick={() => this.deleteCommentClick(comment.comment_id)}>Delete Comment</Button>}
+                    </div>
+                    <div>
+                        {this.state.commentEditID === comment.comment_id && this.state.editComment &&
+                            <div>
+                                <Input onChange={this.handleEditCommentChange} placeholder="edit comment" />
+                                <Button onClick={() => this.handleEditCommentClick(comment.comment_id)} variant="outlined">Submit Edit</Button>
+                            </div>}
                     </div>
                 </div>
             )

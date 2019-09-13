@@ -19,7 +19,6 @@ function* deleteComment(action) {
     //action.payload has id of comment to be deleted from click
     let id = action.payload.id;
     let detailsID = action.payload.detailsID
-    console.log()
     try {
         yield axios.delete(`/api/comment/${id}`)
         yield put ({
@@ -32,9 +31,26 @@ function* deleteComment(action) {
     }
 }
 
+function* editComment(action) {
+    let id = action.payload.id;
+    let detailsID = action.payload.detailsID
+    console.log('edit comment payload is', action.payload);
+    try {
+        yield axios.put(`/api/comment/${id}`, action.payload)
+        yield put ({
+            type: 'GET_DETAILS',
+            payload: detailsID
+        })
+    }
+    catch (error) {
+        console.log('error with edit comment', error)
+    }
+}
+
 function* comments() {
     yield takeEvery('SUBMIT_COMMENT', submitComment)
     yield takeEvery('DELETE_COMMENT', deleteComment)
+    yield takeEvery('EDIT_COMMENT', editComment)
 }
 
 export default comments;

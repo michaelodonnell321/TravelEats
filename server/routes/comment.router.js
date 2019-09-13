@@ -36,6 +36,26 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         res.sendStatus(200);
     })
     .catch((error) => {
+        console.log('error in comment delete', error)
+        res.sendStatus(500);
+    })
+})
+
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    let commentID = req.params.id;
+    let changedComment = req.body.changedComment;
+    console.log('comment to edit is', commentID);
+    let queryText = `
+    UPDATE "comments"
+    SET "comment" = $1
+    WHERE "id" = $2;
+    `;
+    pool.query(queryText, [changedComment, req.params.id])
+    .then(() => {
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log('error in comment put', error)
         res.sendStatus(500);
     })
 })
