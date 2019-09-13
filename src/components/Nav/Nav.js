@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
+// import ListItemIcon from '@material-ui/core/ListItemIcon'
+// import { Home, Book, AccountBox } from '@material-ui/icons'
 
 const Nav = (props) => (
   <div className="nav">
@@ -21,6 +23,9 @@ const Nav = (props) => (
         <>
           <Link className="nav-link" to="/list">
             Listings
+          </Link>
+          <Link className="nav-link" to="/add">
+            Add
           </Link>
           <Link className="nav-link" to="/info">
             Info Page

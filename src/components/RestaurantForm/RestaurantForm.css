@@ -1,0 +1,23 @@
+.formName {
+    font-size: 30px;
+    font-weight: 300;
+    margin: 0px 20px;
+}
+
+.formDiv {
+    display: flex;
+    margin: 10px 10px;
+}
+
+.background {
+    background-image: url("/images/formbackground.jpg");
+    height: -webkit-fill-available;
+}
+
+Input {
+    color: white;
+}
+
+label {
+    color: white;
+}
