@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
+// import ListItemIcon from '@material-ui/core/ListItemIcon'
+// import { Home, Book, AccountBox } from '@material-ui/icons'
 
 const Nav = (props) => (
   <div className="nav">

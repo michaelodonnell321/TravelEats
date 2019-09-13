@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('req.params is', req.params);
     let detailsID = req.params.id;
     const queryText = `
@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('restaurant POST route');
     console.log(req.body);
     //checks user authentication and logs user
@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
     `;
     pool.query(queryText, [req.body.name, req.body.type, req.user.id, req.body.address, req.body.city, req.body.state, req.body.zip,
     req.body.country, req.body.photo_url])
-    .then((response) => {
+    .then(() => {
         res.sendStatus(200);
     })
     .catch((error) => {

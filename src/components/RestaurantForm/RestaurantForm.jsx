@@ -12,6 +12,8 @@ import { Select } from '@material-ui/core';
 import FormControl from '@material-ui/core/Select'
 import { withStyles } from '@material-ui/styles';
 import swal from '@sweetalert/with-react';
+import Button from "@material-ui/core/Button";
+import './RestaurantForm.css';
 
 //ADD A RESTAURANT FORM
 // const styles = theme => ({
@@ -85,43 +87,44 @@ class RestaurantForm extends Component {
         const { classes } = this.props;
 
         return (
-            <div>
-                <div>
-                    <h1>Restaurant Information</h1>
+            <div className="background">
+                <div className="formDiv">
+                    <h1 className="formName">Restaurant Information</h1>
                 </div>
-                <div className="restaurantForm">
-                    <form className="inputForm" onSubmit={this.handleSubmit}>
-                        {/* <FormControl> */}
-                            <InputLabel htmlFor="name">Name</InputLabel>
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    margin: 20,
+                    padding: 20
+                }} 
+                >
+                    <form style={{ width: "75%" }} className="inputForm" onSubmit={this.handleSubmit}>
+                            <InputLabel htmlFor="text">Name</InputLabel>
                         <Input
-                            placeholder="name"
                             value={this.state.newRestaurant.name}
                             onChange={(event) => this.handleChangeFor(event, 'name')} />
-                        {/* <Input
-                            placeholder="type of restaurant"
-                            onChange={(event) => this.handleChangeFor(event, 'type')} /> */}
+                            <InputLabel htmlFor="text">Address</InputLabel>
                         <Input
-                            placeholder="address"
                             value={this.state.newRestaurant.address}
                             onChange={(event) => this.handleChangeFor(event, 'address')} />
+                            <InputLabel htmlFor="text">City</InputLabel>
                         <Input
-                            placeholder="city"
                             value={this.state.newRestaurant.city}
                             onChange={(event) => this.handleChangeFor(event, 'city')} />
+                        <InputLabel htmlFor="text">State</InputLabel>
                         <Input
-                            placeholder="state"
                             value={this.state.newRestaurant.state}
                             onChange={(event) => this.handleChangeFor(event, 'state')} />
+                        <InputLabel htmlFor="text">Country</InputLabel>
                         <Input
-                            placeholder="country"
                             value={this.state.newRestaurant.country}
                             onChange={(event) => this.handleChangeFor(event, 'country')} />
+                        <InputLabel htmlFor="text">Zip</InputLabel>
                         <Input
-                            placeholder="zip"
                             value={this.state.newRestaurant.zip}
                             onChange={(event) => this.handleChangeFor(event, 'zip')} />
+                        <InputLabel htmlFor="text">Comments</InputLabel>
                         <Input
-                            placeholder="comments"
                             value={this.state.newRestaurant.comments}
                             onChange={(event) => this.handleChangeFor(event, 'comments')} />
                             <FormLabel component="legend"></FormLabel>
@@ -138,7 +141,7 @@ class RestaurantForm extends Component {
                             <InputLabel>
                                 Select cusine type:
                             </InputLabel>
-                        <select value={this.state.newRestaurant.type} onChange={(event) => this.handleChangeFor(event, 'type')}>
+                        <Select value={this.state.newRestaurant.type} onChange={(event) => this.handleChangeFor(event, 'type')}>
                             <option value="american">American</option>
                             <option value="bbq">BBQ</option>
                             <option value="british">British</option>
@@ -158,10 +161,13 @@ class RestaurantForm extends Component {
                             <option value="russian">Russian</option>
                             <option value="southAmerican">South American</option>
                             onChange={this.handlePhotoSelect}
-                        </select>
+                        </Select>
+                        <br/>
+                        <br/>
                         {/* </FormControl> */}
-                        <input type="submit" value="Add Restaurant" />
+                        <Button variant="outlined" color="primary" type="submit" value="Add Restaurant">Submit</Button>
                     </form>
+                    <br />
                 </div>
             </div>
         );
