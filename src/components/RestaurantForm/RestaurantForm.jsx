@@ -60,7 +60,7 @@ class RestaurantForm extends Component {
                 country: '',
                 zip: '',
                 comments: '',
-                recommended: '',
+                recommended: true,
                 photo_url: ''
 
             }
