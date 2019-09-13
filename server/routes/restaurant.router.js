@@ -48,13 +48,23 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     //checks user authentication and logs user
     console.log('is authenticated?', req.isAuthenticated());
     console.log('user', req.user);
-
+    if (req.body.recommended === "recommended") {
+        recommendedBoolean = true
+    } else if (req.body.recommended === "notRecommended") {
+        recommendedBoolean = false
+    }
+    let photoQuery = `images/${req.body.type}.jpg`;
+    console.log('the photo is', photoQuery);
     let queryText = `
+    WITH rows AS (
     INSERT into "restaurants" ("name", "type", "user_id", "address", "city", "state", "zip", "country", "photo_url")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING id as new_restaurant_id)
+    INSERT into "comments" ("user_id", "restaurant_id", "comment", "recommended")
+    VALUES ($10, (SELECT new_restaurant_id FROM rows), $11, $12);
     `;
     pool.query(queryText, [req.body.name, req.body.type, req.user.id, req.body.address, req.body.city, req.body.state, req.body.zip,
-    req.body.country, req.body.photo_url])
+    req.body.country, photoQuery, req.user.id, req.body.comments, recommendedBoolean ])
     .then(() => {
         res.sendStatus(200);
     })

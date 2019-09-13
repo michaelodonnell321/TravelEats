@@ -1,6 +1,7 @@
 .mainBody {
     background-image: url("/images/loginbackground.jpg");
     width: auto;
-    height: -webkit-fill-available; 
+    height: -webkit-fill-available;
+    background-size: cover;
 
 }
