@@ -22,8 +22,11 @@ class RestaurantDetails extends Component {
     state = {
         commentBox: true,
         currentComment: '',
+        changedComment: '',
+        editComment: false,
+        commentEditID: 0,
     }
-    
+
     componentDidMount() {
         console.log(this.props.match.params.id)
         console.log(this.props)
@@ -47,6 +50,9 @@ class RestaurantDetails extends Component {
     }
 
     handleCommentSubmit = (id) => {
+        this.setState({
+            editComment: !this.state.editComment
+        })
         console.log('comment submit clicked')
         this.props.dispatch({
             type: 'SUBMIT_COMMENT',
@@ -68,15 +74,55 @@ class RestaurantDetails extends Component {
     }
 
     editCommentClick = (id) => {
-        console.log('edit comment clicked id:', id)
+        this.setState({
+            editComment: true,
+            commentEditID: id
+        })
     }
 
     deleteCommentClick = (id) => {
-        console.log('delete comment clicked id:', id)
+        console.log('id for delete comment payload is', id)
         this.props.dispatch({
             type: 'DELETE_COMMENT',
-            payload: id
+            payload: {
+                id: id,
+                detailsID: this.props.match.params.id
+            }
         })
+        swal(
+            <div>
+                <h1>Comment deleted!</h1>
+            </div>
+        )
+    }
+
+    handleEditCommentChange = (event) => {
+        this.setState({
+            changedComment: event.target.value
+        })
+    }
+
+    handleEditCommentClick = (id) => {
+        console.log('edit comment clicked', this.state.editComment)
+        console.log('edit comment clicked id:', id)
+        console.log('edit comment', this.state)
+
+        this.props.dispatch({
+            type: 'EDIT_COMMENT',
+            payload: {
+                id: id,
+                detailsID: this.props.match.params.id,
+                changedComment: this.state.changedComment
+            }
+        })
+        this.setState({
+            editComment: !this.state.editComment,
+        })
+        swal(
+            <div>
+                <h1>Comment edited!</h1>
+            </div>
+        )
     }
 
     render() {
@@ -84,14 +130,21 @@ class RestaurantDetails extends Component {
             return (
                 <div>
                     <div className="commentList" key={comment.comment_id}>
-                    <p>{comment.username} says: {comment.recommended}</p>
-                    <p>{comment.comment}</p>
+                        <p>{comment.username} says: {comment.recommended}</p>
+                        <p>{comment.comment}</p>
                     </div>
                     <div>
                         {this.props.user.id === comment.user_id &&
-                        <Button variant="outlined" onClick={() => this.editCommentClick(comment.comment_id)}>Edit Comment</Button>}
+                            <Button variant="outlined" onClick={() => this.editCommentClick(comment.comment_id)}>Edit Comment</Button>}
                         {this.props.user.id === comment.user_id &&
-                        <Button variant="outlined" onClick={() => this.deleteCommentClick(comment.comment_id)}>Delete Comment</Button>}
+                            <Button variant="outlined" onClick={() => this.deleteCommentClick(comment.comment_id)}>Delete Comment</Button>}
+                    </div>
+                    <div>
+                        {this.state.commentEditID === comment.comment_id && this.state.editComment &&
+                            <div>
+                                <Input onChange={this.handleEditCommentChange} placeholder="edit comment" />
+                                <Button onClick={() => this.handleEditCommentClick(comment.comment_id)} variant="outlined">Submit Edit</Button>
+                            </div>}
                     </div>
                 </div>
             )
@@ -105,18 +158,18 @@ class RestaurantDetails extends Component {
                 <p>{this.props.details[0].address} {this.props.details[0].city}, {this.props.details[0].state} {this.props.details[0].zip}
                 </p>
                 <div>
-                {this.state.commentBox ? (
-                <Button variant="outlined" onClick={() => this.handleCommentClick(this.props.details[0].id)}>Comment</Button>
-                ) : (
-                    <div>
-                <TextField
-                onChange={this.handleCommentChange}
-                placeholder="Comment!" />
-                <Button variant="outlined" onClick={() => this.handleCommentSubmit(this.props.details[0].id)}>Submit</Button>
+                    {this.state.commentBox ? (
+                        <Button variant="outlined" onClick={() => this.handleCommentClick(this.props.details[0].id)}>Comment</Button>
+                    ) : (
+                            <div>
+                                <TextField
+                                    onChange={this.handleCommentChange}
+                                    placeholder="Comment!" />
+                                <Button variant="outlined" onClick={() => this.handleCommentSubmit(this.props.details[0].id)}>Submit</Button>
+                            </div>
+                        )}
                 </div>
-                )}
-                </div>
-                <Button variant="outlined">Closed?</Button> 
+                <Button variant="outlined">Closed?</Button>
             </div>
 
         let name = this.props.details[0].name

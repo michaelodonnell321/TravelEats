@@ -26,7 +26,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     "restaurants".state, "restaurants".zip, "restaurants".country, "restaurants".photo_url, "restaurants".closed from "restaurants"
     JOIN "comments" ON "restaurants".id = "comments".restaurant_id
     JOIN "user" ON "comments".user_id = "user".id
-    WHERE "restaurants".id = $1;
+    WHERE "restaurants".id = $1
+    ORDER BY "comment_id";
     `;
     pool.query(queryText, [detailsID])
         .then((result) => {
