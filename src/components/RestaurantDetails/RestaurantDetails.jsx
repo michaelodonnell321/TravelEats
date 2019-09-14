@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import swal from '@sweetalert/with-react';
+import ClosedText from '../ClosedText/ClosedText';
 
 //THIS IS THE DETAILS PAGE FOR EACH INDIVIDUAL RESTAURANT
 
@@ -40,6 +41,28 @@ class RestaurantDetails extends Component {
         console.log('comment was clicked');
         this.setState({
             commentBox: !this.state.commentBox
+        })
+    }
+
+    handleClosedClick = (id) => {
+        console.log('closed was clicked!');
+        this.props.dispatch({
+            type: 'CLOSE_RESTAURANT',
+            payload: {
+                id: id,
+                restaurantID: this.props.match.params.id
+            }
+        })
+    }
+
+    handleOpenClick = (id) => {
+        console.log('open was clicked!');
+        this.props.dispatch({
+            type: 'OPEN_RESTAURANT',
+            payload: {
+                id: id,
+                restaurantID: this.props.match.params.id
+            }
         })
     }
 
@@ -125,6 +148,8 @@ class RestaurantDetails extends Component {
         )
     }
 
+    
+
     render() {
         let commentsArray = this.props.details.map(comment => {
             return (
@@ -154,9 +179,15 @@ class RestaurantDetails extends Component {
             <div className="restaurantDetails">
                 <h1>{this.props.details[0].name}</h1>
                 <p>{this.props.details[0].type}</p>
-                <img className="listingImage" src={this.props.details[0].photo_url} />
+                <div>
+                {this.props.details[0].closed ? (
+                    <img className="listingImage" src={`/images/closed.jpg`} />
+                ) : (
+                    <img className="listingImage" src={this.props.details[0].photo_url} />
+                )}
                 <p>{this.props.details[0].address} {this.props.details[0].city}, {this.props.details[0].state} {this.props.details[0].zip}
                 </p>
+                </div>
                 <div>
                     {this.state.commentBox ? (
                         <Button variant="outlined" onClick={() => this.handleCommentClick(this.props.details[0].id)}>Comment</Button>
@@ -169,7 +200,11 @@ class RestaurantDetails extends Component {
                             </div>
                         )}
                 </div>
-                <Button variant="outlined">Closed?</Button>
+                {this.props.details[0].closed ? (
+                    <Button onClick={() => this.handleOpenClick(this.props.details[0].id)} variant="outlined">Open?</Button>
+                ) : (
+                    <Button onClick={() => this.handleClosedClick(this.props.details[0].id)} variant="outlined">Closed?</Button>
+                )}
             </div>
 
         let name = this.props.details[0].name
@@ -177,7 +212,7 @@ class RestaurantDetails extends Component {
         console.log('restaurnat is', name);
         return (
             <div>
-                {/* {JSON.stringify(this.props.details)} */}
+                <ClosedText />
                 {restaurantArray}
                 {commentsArray}
             </div>
