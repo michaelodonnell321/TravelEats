@@ -39,6 +39,38 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+router.put('/closed/:id', rejectUnauthenticated, (req, res) => {
+    let queryText = `
+    UPDATE "restaurants"
+    SET "closed" = true
+    WHERE "id" = $1;
+    `;
+    pool.query(queryText, [req.params.id])
+    .then((response) => {
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log('error in closed put route', error)
+        res.sendStatus(500);
+    })
+})
+
+router.put('/open/:id', rejectUnauthenticated, (req, res) => {
+    let queryText = `
+    UPDATE "restaurants"
+    SET "closed" = false
+    WHERE "id" = $1;
+    `;
+    pool.query(queryText, [req.params.id])
+    .then((response) => {
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log('error in open put route', error)
+        res.sendStatus(500);
+    })
+})
+
 /**
  * POST route template
  */

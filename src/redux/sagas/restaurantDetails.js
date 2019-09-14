@@ -16,8 +16,40 @@ function* getDetails(action) {
     }
 }
 
+function* closeRestaurant(action) {
+    try {
+        let id = action.payload.id
+        let detailsID = action.payload.restaurantID
+        yield axios.put(`/api/restaurant/closed/${id}`, id)
+        yield put({
+            type: 'GET_DETAILS',
+            payload: detailsID
+        })
+    }
+    catch (error) {
+        console.log('error in close restaurant saga', error);
+    }
+}
+
+function* openRestaurant(action) {
+    try {
+        let id = action.payload.id
+        let detailsID = action.payload.restaurantID
+        yield axios.put(`/api/restaurant/open/${id}`, id)
+        yield put({
+            type: 'GET_DETAILS',
+            payload: detailsID
+        })
+    }
+    catch (error) {
+        console.log('error in open restaurant saga', error);
+    }
+}
+
 function* restaurantDetails() {
     yield takeEvery('GET_DETAILS', getDetails)
+    yield takeEvery('CLOSE_RESTAURANT', closeRestaurant)
+    yield takeEvery('OPEN_RESTAURANT', openRestaurant)
 }
 
 export default restaurantDetails;
