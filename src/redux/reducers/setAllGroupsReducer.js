@@ -1,0 +1,3 @@
+const setAllGroupsReducer = (state = [], action) => {
+        
+}
