@@ -9,8 +9,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     let groupID = req.body.newGroup.newGroupID;
     let adminID = req.body.adminID;
     console.log(`group post items name ${groupName}, id ${groupID}, admin ${adminID}`)
-    let queryText = `INSERT into "groups" ("group_name", "group_id_number", "group_admin")
-    VALUES ($1, $2, $3);
+    //inserts new group and also inserts admin into users_groups
+    let queryText = `WITH rows AS (
+	INSERT into "groups" ("group_name", "group_id_number", "group_admin")
+	VALUES ($1, $2, $3)
+	RETURNING id as new_group_id, group_admin as person)
+	INSERT INTO "users_groups" ("user_id", "groups_id")
+	VALUES ((SELECT person FROM rows), (SELECT new_group_id FROM rows));
     `;
     pool.query(queryText, [groupName, groupID, adminID])
         .then(() => {
