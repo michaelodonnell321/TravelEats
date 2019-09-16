@@ -20,6 +20,10 @@ class EditProfileHeader extends Component {
         this.props.history.push(`/profile/${id}`)
     }
 
+    handleCreateGroupClick = (id) => {
+        this.props.history.push(`/create_group`)
+    }
+
     render() {
 
         
@@ -33,7 +37,7 @@ class EditProfileHeader extends Component {
                         <h1>Welcome, {this.props.user.username}!</h1>
                     </span>
                     <span>
-                        <Button>Create New Group</Button>
+                        <Button onClick={() => this.handleCreateGroupClick(this.props.user.id)}>Create New Group</Button>
                     </span>
                     <span>
                         <h2>Your current active group is: {this.props.group[0].group_name}</h2>
