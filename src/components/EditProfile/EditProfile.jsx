@@ -2,32 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
-
+import EditProfileForm from '../EditProfileForm/EditProfileForm';
+import GroupGenerator from '../GroupGenerator/GroupGenerator';
 //PROFILE EDIT VIEW
 
 class EditProfile extends Component {
+
+    componentDidMount() {
+        this.getGroups();
+    }
+
+    getGroups = () => {
+        this.props.dispatch({
+            type: 'FETCH_ALL_GROUPS'
+        })
+    }
+    backClick = () => {
+        this.props.history.push('/list')
+    }
+
     render() {
         return (
             <div>
                 <h1>Edit Profile</h1>
-                <Button variant="outlined">Back</Button>
+                <Button onClick={this.backClick} variant="outlined">Back</Button>
                 <Button variant="outlined">Admin</Button>
-                <p>Edit Profile Information</p>
-                <br />
-                <Input placeholder="email address" />
-                <Button variant="outlined">Submit</Button>
-                <Input placeholder="name" />
-                <Button variant="outlined">Submit</Button>
-                <Input placeholder="location" />
-                <Button variant="outlined">Submit</Button>
-                <p>
-                    Request to join a group by entering the Group Number
+                <EditProfileForm />
+                    Join a group by entering the Group Number
                     provided to you by the Group Admin here:
-                </p>
                 <Input placeholder="group number" />
                 <Button variant="outlined">Submit</Button>
                 <p>Select group to view:</p>
-                {/* MAP ON REDUCER OF GROUPS HERE */}
+                {<GroupGenerator />}
             </div>
         );
     }
@@ -35,7 +41,8 @@ class EditProfile extends Component {
 
 const mapStateToProps = (reduxStore) => {
     return {
-        reduxStore
+        reduxStore,
+        group: reduxStore.groupReducer,
     }
 }
 
