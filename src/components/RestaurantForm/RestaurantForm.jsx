@@ -73,8 +73,7 @@ class RestaurantForm extends Component {
             <div>
                 <h1>Restaurant submitted successfully!</h1>
             </div>
-        )
-    }
+        )}
 
     // handleCusineChange = (event) => {
     //     console.log('seleted cuisine is ', event.target.value)
