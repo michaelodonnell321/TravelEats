@@ -30,12 +30,19 @@ class EditProfile extends Component {
         this.props.history.push('/list')
     }
 
+    handleAdminClick = (id) => {
+        this.props.dispatch({
+            type: 'GET_ADMIN_GROUP_INFO',
+            payload: id
+        })
+        this.props.history.push(`/admin/${id}`)
+    }
     render() {
         return (
             <div>
                 <h1>Edit Profile</h1>
                 <Button onClick={this.backClick} variant="outlined">Back</Button>
-                <Button variant="outlined">Admin</Button>
+                <Button onClick={() => this.handleAdminClick(this.props.user.active_group_id)} variant="outlined">Admin</Button>
                 <EditProfileForm />
                     Join a group by entering the Group Number
                     provided to you by the Group Admin here:

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './RestaurantList.css'
 import RestaurantListHeader from '../RestaurantListHeader/RestaurantListHeader';
+import RestaurantTypeSelector from '../RestaurantTypeSelector/RestaurantTypeSelector';
 
 class RestaurantList extends Component {
     componentDidMount() {
@@ -42,6 +43,7 @@ class RestaurantList extends Component {
             <div>
                 <div>
                     <RestaurantListHeader />
+                    <RestaurantTypeSelector />
                 </div>
                 {restaurantArray}
             </div>

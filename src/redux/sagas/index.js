@@ -6,6 +6,8 @@ import restaurantSaga from './restaurantSaga';
 import restaurantDetails from './restaurantDetails';
 import comments from './commentSaga';
 import groups from './groupSaga';
+import profile from './profile';
+import adminSaga from './adminSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +25,7 @@ export default function* rootSaga() {
     restaurantDetails(),
     comments(),
     groups(),
+    profile(),
+    adminSaga(),
   ]);
 }
