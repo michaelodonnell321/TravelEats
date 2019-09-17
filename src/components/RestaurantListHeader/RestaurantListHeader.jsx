@@ -40,7 +40,7 @@ class EditProfileHeader extends Component {
                         <Button onClick={() => this.handleCreateGroupClick(this.props.user.id)}>Create New Group</Button>
                     </span>
                     <span>
-                        <h2>Your current active group is: {this.props.group[0].group_name}</h2>
+                        <h2>Your current active group is: {this.props.profile[0].group_name}</h2>
                     </span>
                 </div>
             </div>
@@ -53,6 +53,7 @@ const mapStateToProps = (reduxStore) => {
         reduxStore,
         user: reduxStore.user,
         group: reduxStore.groupReducer,
+        profile: reduxStore.profilePageReducer,
     }
 }
 export default connect(mapStateToProps)(withRouter(EditProfileHeader));

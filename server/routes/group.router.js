@@ -3,6 +3,21 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+router.get('/active/:id', rejectUnauthenticated, (req, res) => {
+    let userID = req.user.id;
+    let queryText = `
+    SELECT "group_name" FROM "groups"
+    JOIN "user" ON "user".active_group_id = "groups".id
+    WHERE "user".id = $1;
+    `;
+    pool.query(queryText, [userID])
+    .then(result => res.send(result.rows))
+    .catch(error => {
+        console.log('error in active group get', error);
+        res.sendStatus(500);
+    })
+})
+
 router.get('/', rejectUnauthenticated, (req, res) => {
     let userID = req.user.id;
     console.log(' in group router get userID is', userID);
@@ -14,25 +29,26 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [userID])
         .then(result => res.send(result.rows))
         .catch(error => {
-        console.log('error in group router get', error);
-        res.sendStatus(500);
-    })
+            console.log('error in group router get', error);
+            res.sendStatus(500);
+        })
 })
 
 router.get('/allgroups', rejectUnauthenticated, (req, res) => {
+    console.log('in all groups get', req.user.id)
     let userID = req.user.id;
     let queryText = `
-    SELECT "user".id, "groups".group_name FROM "groups"
+    SELECT "groups".group_name, "groups".id FROM "groups"
     JOIN "users_groups" ON "users_groups".groups_id = "groups".id
     JOIN "user" ON "user".id = "users_groups".user_id
     WHERE "user".id = ($1);
     `;
     pool.query(queryText, [userID])
-    .then(result => res.send(result.rows))
-    .catch(error => {
-        console.log('error in group allgroups get', error);
-        res.sendStatus(500);
-    })
+        .then(result => res.send(result.rows))
+        .catch(error => {
+            console.log('error in group allgroups get', error);
+            res.sendStatus(500);
+        })
 })
 
 router.post('/', rejectUnauthenticated, (req, res) => {
@@ -56,6 +72,27 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
         .catch((error) => {
             console.log('error in group post', error);
+            res.sendStatus(500);
+        })
+})
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log(req.body);
+    let userID = req.body.id;
+    let newGroup = req.body.name;
+
+    console.log(userID, newGroup)
+    let queryText = `
+    UPDATE "user"
+    SET "active_group_id" = $1
+    WHERE "id" = $2;
+    `;
+    pool.query(queryText, [newGroup, userID])
+        .then((response) => {
+            res.send(response.data);
+        })
+        .catch((error) => {
+            console.log('error in group put', error);
             res.sendStatus(500);
         })
 })

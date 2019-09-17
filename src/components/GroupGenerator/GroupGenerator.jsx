@@ -1,15 +1,37 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+
+
 
 class GroupGenerator extends Component {
+    componentDidMount() {
+    console.log('props are', this.props);
+    }
+    
+
+    handleGroupClick = (name) => {
+        console.log('clicked name', name);
+        console.log('id of click', this.props.user.id)
+        this.props.dispatch({
+            type: 'CLICK_ACTIVE_GROUP',
+            payload: {
+                name: name,
+                id: this.props.user.id
+            }
+        })
+    }
+
     render() {
         return (
             <div>
                 {this.props.group.map(group => {
                     return (
                         <div>
+                            <Button value={group.group_name} onClick={() => this.handleGroupClick(group.id)}variant="outline">
                             {group.group_name}
-                            </div>
+                            </Button>
+                        </div>
                     )
                 })}
             </div>
@@ -20,6 +42,7 @@ class GroupGenerator extends Component {
 const mapStateToProps = (reduxStore) => {
     return {
         group: reduxStore.groupReducer,
+        user: reduxStore.user
     }
 }
 export default connect(mapStateToProps)(GroupGenerator);
