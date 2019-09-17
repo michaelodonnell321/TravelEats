@@ -9,7 +9,16 @@ import GroupGenerator from '../GroupGenerator/GroupGenerator';
 class EditProfile extends Component {
 
     componentDidMount() {
+        console.log('props are', this.props)
         this.getGroups();
+        this.getActiveGroup();
+    }
+
+    getActiveGroup = () => {
+        this.props.dispatch({
+            type: 'FETCH_ACTIVE_GROUP',
+            payload: this.props.user.id
+        })
     }
 
     getGroups = () => {
@@ -32,6 +41,7 @@ class EditProfile extends Component {
                     provided to you by the Group Admin here:
                 <Input placeholder="group number" />
                 <Button variant="outlined">Submit</Button>
+                <p>Current Active Group: {this.props.profile[0].group_name}</p>
                 <p>Select group to view:</p>
                 {<GroupGenerator />}
             </div>
@@ -43,6 +53,8 @@ const mapStateToProps = (reduxStore) => {
     return {
         reduxStore,
         group: reduxStore.groupReducer,
+        user: reduxStore.user,
+        profile: reduxStore.profilePageReducer
     }
 }
 

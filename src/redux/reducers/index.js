@@ -5,6 +5,7 @@ import user from './userReducer';
 import restaurantReducer from './restaurantReducer';
 import detailsReducer from './detailsReducer';
 import groupReducer from './groupReducer';
+import profilePageReducer from './profilePageReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   restaurantReducer,
   detailsReducer,
   groupReducer,
+  profilePageReducer,
 });
 
 export default rootReducer;
