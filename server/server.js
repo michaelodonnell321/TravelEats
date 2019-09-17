@@ -13,6 +13,8 @@ const userRouter = require('./routes/user.router');
 const restaurantRouter = require('./routes/restaurant.router');
 const commentRouter = require('./routes/comment.router');
 const groupRouter = require('./routes/group.router');
+const profileRouter = require('./routes/profile.router');
+const adminRouter = require('./routes/admin.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +32,8 @@ app.use('/api/user', userRouter);
 app.use('/api/restaurant', restaurantRouter);
 app.use('/api/comment', commentRouter);
 app.use('/api/group', groupRouter);
+app.use('/api/profile', profileRouter);
+app.use('/api/admin', adminRouter);
 
 // Serve static files
 app.use(express.static('build'));

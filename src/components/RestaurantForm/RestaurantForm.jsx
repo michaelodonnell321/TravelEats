@@ -141,24 +141,24 @@ class RestaurantForm extends Component {
                                 Select cusine type:
                             </InputLabel>
                         <Select value={this.state.newRestaurant.type} onChange={(event) => this.handleChangeFor(event, 'type')}>
-                            <option value="american">American</option>
-                            <option value="bbq">BBQ</option>
-                            <option value="british">British</option>
-                            <option value="centralAmerican">Central American</option>
-                            <option value="chinese">Chinese</option>
-                            <option value="ethiopian">Ethiopian</option>
-                            <option value="german">German</option>
-                            <option value="greek">Greek</option>
-                            <option value="irish">Irish</option>
-                            <option value="italian">Italian</option>
-                            <option value="japanese">Japanese</option>
-                            <option value="korean">Korean</option>
-                            <option value="lebanese">Lebanese</option>
-                            <option value="mexican">Mexican</option>
-                            <option value="middleEastern">Middle Eastern</option>
-                            <option value="polish">Polish</option>
-                            <option value="russian">Russian</option>
-                            <option value="southAmerican">South American</option>
+                            <option value="American">American</option>
+                            <option value="Bbq">BBQ</option>
+                            <option value="British">British</option>
+                            <option value="Central American">Central American</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Ethiopian">Ethiopian</option>
+                            <option value="German">German</option>
+                            <option value="Greek">Greek</option>
+                            <option value="Irish">Irish</option>
+                            <option value="Italian">Italian</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Korean">Korean</option>
+                            <option value="Lebanese">Lebanese</option>
+                            <option value="Mexican">Mexican</option>
+                            <option value="Middle Eastern">Middle Eastern</option>
+                            <option value="Polish">Polish</option>
+                            <option value="Russian">Russian</option>
+                            <option value="South American">South American</option>
                             onChange={this.handlePhotoSelect}
                         </Select>
                         <br/>

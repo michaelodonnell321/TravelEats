@@ -21,6 +21,7 @@ import RestaurantList from '../RestaurantList/RestaurantList';
 import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
 import EditProfile from '../EditProfile/EditProfile';
 import CreateNewGroup from '../CreateNewGroup/CreateNewGroup';
+import AdminPage from '../AdminPage/AdminPage';
 import './App.css';
 
 class App extends Component {
@@ -80,6 +81,10 @@ class App extends Component {
               <ProtectedRoute
               path="/create_group"
               component={CreateNewGroup}
+              />
+              <ProtectedRoute
+              path="/admin/:id"
+              component={AdminPage}
               />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
