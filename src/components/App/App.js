@@ -22,6 +22,7 @@ import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
 import EditProfile from '../EditProfile/EditProfile';
 import CreateNewGroup from '../CreateNewGroup/CreateNewGroup';
 import AdminPage from '../AdminPage/AdminPage';
+import NavHeader from '../NavHeader/NavHeader';
 import './App.css';
 
 class App extends Component {
@@ -31,7 +32,11 @@ class App extends Component {
 
   render() {
     return (
+      
       <Router>
+        <div>
+          <NavHeader />
+        </div>
         <div>
           <Nav />
           <Switch>

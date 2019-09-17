@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import './RestaurantList.css'
 import RestaurantListHeader from '../RestaurantListHeader/RestaurantListHeader';
 import RestaurantTypeSelector from '../RestaurantTypeSelector/RestaurantTypeSelector';
+import {Grid} from '@material-ui/core';
 
 class RestaurantList extends Component {
     componentDidMount() {
