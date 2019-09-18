@@ -5,8 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Icon from '@material-ui/core/Icon';
-import ListItemIcon from '@material-ui/core/ListItemIcon'
+
 
 class EditProfileHeader extends Component {
 
@@ -37,7 +36,7 @@ class EditProfileHeader extends Component {
                 <div>
                     <Grid container alignItems={'center'} justify={'space-evenly'} spacing={2} >
                         <Grid item xs>
-                            <Button variant="outlined" onClick={() => this.handleProfileClick(this.props.user.id)}>Edit Profile<Icon>Edit</Icon></Button>
+                            <Button variant="outlined" onClick={() => this.handleProfileClick(this.props.user.id)}>Edit Profile</Button>
                         </Grid>
                         <Grid item xs>
                             <Box textAlign="center" fontSize="h6.fontSize">Welcome, {this.props.user.username}!

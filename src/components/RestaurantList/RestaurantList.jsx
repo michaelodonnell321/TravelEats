@@ -11,12 +11,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
-
+import Container from '@material-ui/core/Container';
 
 const styles = {
     card: {
         minWidth: 275,
-        backgroundColor: 'red',
+        backgroundColor: '#ffa726',
+        opacity: '.9',
         margin: '10px',
     },
     bullet: {
@@ -29,6 +30,14 @@ const styles = {
     },
     pos: {
         marginBottom: 12,
+    },
+    background: {
+        backgroundImage: "url('/images/formbackground.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        height: "100%",
     },
 };
 
@@ -73,22 +82,17 @@ class RestaurantList extends Component {
                             <p>{restaurant.type}</p>
                                 {restaurant.address} {restaurant.city}, {restaurant.state} {restaurant.zip}
                             </Typography>
-                            <Typography variant="h5">
-                                Tap to see more details
-                            </Typography>
                         </div>
                     </CardContent>
                 </Card>
             )
         })
         return (
-            <div>
-                <div>
+            <Container className={this.props.classes.background}>
                     <RestaurantListHeader />
                     <RestaurantTypeSelector />
-                </div>
                 {restaurantArray}
-            </div>
+            </Container>
         );
     }
 }

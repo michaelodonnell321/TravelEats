@@ -26,8 +26,10 @@ const styles = {
         backgroundAttachment: 'fixed',
         height: "100%",
     },
-    form: {
-        padding: '10px'
+    addForm: {
+        padding: '10px',
+        backgroundColor: '#ffa726',
+        opacity: '0.9',
     }
 }
 //ADD A RESTAURANT FORM
@@ -115,7 +117,7 @@ class RestaurantForm extends Component {
                     padding: 20
                 }}
                 >
-                    <form style={{ width: "75%" }} className={this.props.classes.form} onSubmit={this.handleSubmit}>
+                    <form style={{ width: "75%" }} className={this.props.classes.addForm} onSubmit={this.handleSubmit}>
                         <InputLabel htmlFor="text">Name</InputLabel>
                         <Input
                             value={this.state.newRestaurant.name}
