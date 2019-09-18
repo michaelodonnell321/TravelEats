@@ -22,7 +22,6 @@ import RestaurantDetails from '../RestaurantDetails/RestaurantDetails';
 import EditProfile from '../EditProfile/EditProfile';
 import CreateNewGroup from '../CreateNewGroup/CreateNewGroup';
 import AdminPage from '../AdminPage/AdminPage';
-import NavHeader from '../NavHeader/NavHeader';
 import './App.css';
 
 class App extends Component {
@@ -32,11 +31,8 @@ class App extends Component {
 
   render() {
     return (
-      
+
       <Router>
-        <div>
-          <NavHeader />
-        </div>
         <div>
           <Nav />
           <Switch>
@@ -74,27 +70,27 @@ class App extends Component {
               exact
               path="/list"
               component={RestaurantList}
-              />
-              <ProtectedRoute
+            />
+            <ProtectedRoute
               path="/details/:id"
               component={RestaurantDetails}
-              />
-              <ProtectedRoute
+            />
+            <ProtectedRoute
               path="/profile/:id"
               component={EditProfile}
-              />
-              <ProtectedRoute
+            />
+            <ProtectedRoute
               path="/create_group"
               component={CreateNewGroup}
-              />
-              <ProtectedRoute
+            />
+            <ProtectedRoute
               path="/admin/:id"
               component={AdminPage}
-              />
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Router>
     )

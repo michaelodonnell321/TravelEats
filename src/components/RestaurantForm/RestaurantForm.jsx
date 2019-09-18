@@ -3,18 +3,33 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel'
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Select } from '@material-ui/core';
 import FormControl from '@material-ui/core/Select'
-import { withStyles } from '@material-ui/styles';
 import swal from '@sweetalert/with-react';
 import Button from "@material-ui/core/Button";
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import './RestaurantForm.css';
+import Container from '@material-ui/core/Container';
 
+const styles = {
+    background: {
+        backgroundImage: "url('/images/formbackground.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        height: "100%",
+    },
+    form: {
+        padding: '10px'
+    }
+}
 //ADD A RESTAURANT FORM
 // const styles = theme => ({
 //     formControl: {
@@ -73,7 +88,8 @@ class RestaurantForm extends Component {
             <div>
                 <h1>Restaurant submitted successfully!</h1>
             </div>
-        )}
+        )
+    }
 
     // handleCusineChange = (event) => {
     //     console.log('seleted cuisine is ', event.target.value)
@@ -83,30 +99,32 @@ class RestaurantForm extends Component {
     // }
 
     render() {
-        const { classes } = this.props;
 
         return (
-            <div className="background">
+            <Container className ={this.props.classes.background}>
                 <div className="formDiv">
-                    <h1 className="formName">Restaurant Information</h1>
+                    <Typography component="div">
+                        <Box textAlign="center" fontSize="h3.fontSize" className="formName">Add a Restaurant
+                    </Box>
+                    </Typography>
                 </div>
                 <div style={{
                     display: "flex",
                     justifyContent: "center",
                     margin: 20,
                     padding: 20
-                }} 
+                }}
                 >
-                    <form style={{ width: "75%" }} className="inputForm" onSubmit={this.handleSubmit}>
-                            <InputLabel htmlFor="text">Name</InputLabel>
+                    <form style={{ width: "75%" }} className={this.props.classes.form} onSubmit={this.handleSubmit}>
+                        <InputLabel htmlFor="text">Name</InputLabel>
                         <Input
                             value={this.state.newRestaurant.name}
                             onChange={(event) => this.handleChangeFor(event, 'name')} />
-                            <InputLabel htmlFor="text">Address</InputLabel>
+                        <InputLabel htmlFor="text">Address</InputLabel>
                         <Input
                             value={this.state.newRestaurant.address}
                             onChange={(event) => this.handleChangeFor(event, 'address')} />
-                            <InputLabel htmlFor="text">City</InputLabel>
+                        <InputLabel htmlFor="text">City</InputLabel>
                         <Input
                             value={this.state.newRestaurant.city}
                             onChange={(event) => this.handleChangeFor(event, 'city')} />
@@ -126,19 +144,19 @@ class RestaurantForm extends Component {
                         <Input
                             value={this.state.newRestaurant.comments}
                             onChange={(event) => this.handleChangeFor(event, 'comments')} />
-                            <FormLabel component="legend"></FormLabel>
-                            <RadioGroup label="Recommended?" name="recommended" value={this.props.selectedRadio} onChange={(event) => this.handleChangeFor(event, 'recommended')}>
-                                <InputLabel>
-                                    Recommended
-                                </InputLabel>
-                                <FormControlLabel value="recommended" control={<Radio />} label="Recommended" />
-                                <InputLabel>
-                                    Not Recommended
-                                </InputLabel>
-                                <FormControlLabel value="notRecommended" control={<Radio />} label="Not Recommended" />
-                            </RadioGroup>
+                        <FormLabel component="legend"></FormLabel>
+                        <RadioGroup label="Recommended?" name="recommended" value={this.props.selectedRadio} onChange={(event) => this.handleChangeFor(event, 'recommended')}>
                             <InputLabel>
-                                Select cusine type:
+                                Recommended
+                                </InputLabel>
+                            <FormControlLabel value="recommended" control={<Radio />} label="Recommended" />
+                            <InputLabel>
+                                Not Recommended
+                                </InputLabel>
+                            <FormControlLabel value="notRecommended" control={<Radio />} label="Not Recommended" />
+                        </RadioGroup>
+                        <InputLabel>
+                            Select cusine type:
                             </InputLabel>
                         <Select value={this.state.newRestaurant.type} onChange={(event) => this.handleChangeFor(event, 'type')}>
                             <option value="American">American</option>
@@ -161,16 +179,16 @@ class RestaurantForm extends Component {
                             <option value="South American">South American</option>
                             onChange={this.handlePhotoSelect}
                         </Select>
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         {/* </FormControl> */}
                         <Button variant="outlined" color="primary" type="submit" value="Add Restaurant">Submit</Button>
                     </form>
                     <br />
                 </div>
-            </div>
+            </Container >
         );
     }
 }
 
-export default connect()(RestaurantForm);
+export default connect()(withStyles(styles)(RestaurantForm));
