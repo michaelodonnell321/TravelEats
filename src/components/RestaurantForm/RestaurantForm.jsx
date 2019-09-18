@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel'
 import { withStyles } from '@material-ui/core/styles';
@@ -9,7 +8,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Select } from '@material-ui/core';
-import FormControl from '@material-ui/core/Select'
 import swal from '@sweetalert/with-react';
 import Button from "@material-ui/core/Button";
 import Typography from '@material-ui/core/Typography';

@@ -7,15 +7,26 @@ import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import swal from '@sweetalert/with-react';
 import ClosedText from '../ClosedText/ClosedText';
+import Container from '@material-ui/core/Container';
 
 //THIS IS THE DETAILS PAGE FOR EACH INDIVIDUAL RESTAURANT
 
-// const styles = theme => {(
-//     commentList: {
-//         background: 'bold',
-//     },
+const styles = {
+    listing: {
+        backgroundImage: "url('/images/formbackground.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        height: "100%",
+    },
+    commentArea: {
+        padding: '10px',
+        backgroundColor: '#ffa726',
+        opacity: '0.9',
+    }
 
-// )};
+}
 
 
 class RestaurantDetails extends Component {
@@ -106,18 +117,18 @@ class RestaurantDetails extends Component {
     deleteCommentClick = (id) => {
         console.log('id for delete comment payload is', id)
         if (this.props.details.length > 1) {
-        this.props.dispatch({
-            type: 'DELETE_COMMENT',
-            payload: {
-                id: id,
-                detailsID: this.props.match.params.id
-            }
-        })
-        swal(
-            <div>
-                <h1>Comment deleted!</h1>
-            </div>
-        )
+            this.props.dispatch({
+                type: 'DELETE_COMMENT',
+                payload: {
+                    id: id,
+                    detailsID: this.props.match.params.id
+                }
+            })
+            swal(
+                <div>
+                    <h1>Comment deleted!</h1>
+                </div>
+            )
         } else {
             swal(
                 <div>
@@ -157,7 +168,7 @@ class RestaurantDetails extends Component {
         )
     }
 
-    
+
 
     render() {
         let commentsArray = this.props.details.map(comment => {
@@ -189,13 +200,13 @@ class RestaurantDetails extends Component {
                 <h1>{this.props.details[0].name}</h1>
                 <p>{this.props.details[0].type}</p>
                 <div>
-                {this.props.details[0].closed ? (
-                    <img className="listingImage" src={`/images/closed.jpg`} />
-                ) : (
-                    <img className="listingImage" src={this.props.details[0].photo_url} />
-                )}
-                <p>{this.props.details[0].address} {this.props.details[0].city}, {this.props.details[0].state} {this.props.details[0].zip}
-                </p>
+                    {this.props.details[0].closed ? (
+                        <img className="listingImage" alt="closed" src={`/images/closed.jpg`} />
+                    ) : (
+                            <img className="listingImage" alt={this.props.details[0].id} src={this.props.details[0].photo_url} />
+                        )}
+                    <p>{this.props.details[0].address} {this.props.details[0].city}, {this.props.details[0].state} {this.props.details[0].zip}
+                    </p>
                 </div>
                 <div>
                     {this.state.commentBox ? (
@@ -212,8 +223,8 @@ class RestaurantDetails extends Component {
                 {this.props.details[0].closed ? (
                     <Button onClick={() => this.handleOpenClick(this.props.details[0].id)} variant="outlined">Open?</Button>
                 ) : (
-                    <Button onClick={() => this.handleClosedClick(this.props.details[0].id)} variant="outlined">Closed?</Button>
-                )}
+                        <Button onClick={() => this.handleClosedClick(this.props.details[0].id)} variant="outlined">Closed?</Button>
+                    )}
             </div>
 
         let name = this.props.details[0].name
@@ -221,9 +232,15 @@ class RestaurantDetails extends Component {
         console.log('restaurnat is', name);
         return (
             <div>
-                <ClosedText />
-                {restaurantArray}
-                {commentsArray}
+                <Container className={this.props.classes.listing}>
+                    <ClosedText />
+                    <Container className={this.props.classes.commentArea}>
+                        {restaurantArray}
+                    </Container>
+                    <Container className={this.props.classes.commentArea}>
+                        {commentsArray}
+                    </Container>
+                </Container>
             </div>
         );
     }
@@ -238,4 +255,4 @@ const mapStateToProps = (reduxStore) => {
 }
 // export default connect(mapStateToProps)(withStyles(styles)(RestaurantDetails));
 
-export default connect(mapStateToProps)(RestaurantDetails);
+export default connect(mapStateToProps)(withStyles(styles)(RestaurantDetails));
