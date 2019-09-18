@@ -148,13 +148,13 @@ class RestaurantForm extends Component {
                             onChange={(event) => this.handleChangeFor(event, 'comments')} />
                         <FormLabel component="legend"></FormLabel>
                         <RadioGroup label="Recommended?" name="recommended" value={this.props.selectedRadio} onChange={(event) => this.handleChangeFor(event, 'recommended')}>
-                            <InputLabel>
+                            {/* <InputLabel>
                                 Recommended
-                                </InputLabel>
+                                </InputLabel> */}
                             <FormControlLabel value="recommended" control={<Radio />} label="Recommended" />
-                            <InputLabel>
+                            {/* <InputLabel>
                                 Not Recommended
-                                </InputLabel>
+                                </InputLabel> */}
                             <FormControlLabel value="notRecommended" control={<Radio />} label="Not Recommended" />
                         </RadioGroup>
                         <InputLabel>

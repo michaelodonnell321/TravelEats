@@ -1,7 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './LoginPage.css'
+import './LoginPage.css';
+import {withStyles} from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
+const styles = {
+  background: {
+    backgroundImage: "url('/images/formbackground.jpg')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+    height: "100%",
+  },
+  addForm: {
+    padding: '10px',
+    backgroundColor: '#ffa726',
+    opacity: '0.9',
+  }
+}
 class LoginPage extends Component {
   state = {
     username: '',
@@ -32,7 +49,8 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="mainBody">
+      <Container className={this.props.classes.background}>
+      <div className={this.props.classes.addForm}>
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -84,6 +102,7 @@ class LoginPage extends Component {
           </button>
         </center>
       </div>
+      </Container>
     );
   }
 }
@@ -95,4 +114,4 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(LoginPage);
+export default connect(mapStateToProps)(withStyles(styles)(LoginPage));

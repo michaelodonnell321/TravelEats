@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 
+
 class EditProfileHeader extends Component {
 
     componentDidMount() {
@@ -29,7 +30,6 @@ class EditProfileHeader extends Component {
     }
 
     render() {
-
 
         return (
             <div>

@@ -4,7 +4,16 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import EditProfileForm from '../EditProfileForm/EditProfileForm';
 import GroupGenerator from '../GroupGenerator/GroupGenerator';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
 //PROFILE EDIT VIEW
+const styles = {
+    joinGroup: {
+        padding: '10px',
+    }
+}
 
 class EditProfile extends Component {
 
@@ -40,17 +49,30 @@ class EditProfile extends Component {
     render() {
         return (
             <div>
-                <h1>Edit Profile</h1>
+                <Typography component="div">
+                    <Box textAlign="center" fontSize="h3.fontSize" className="formName">Edit Profile Information
+                    </Box>
+                </Typography>
                 <Button onClick={this.backClick} variant="outlined">Back</Button>
                 <Button onClick={() => this.handleAdminClick(this.props.user.active_group_id)} variant="outlined">Admin</Button>
                 <EditProfileForm />
-                    Join a group by entering the Group Number
+                <Typography component="div">
+                    <Box textAlign="center" fontSize="h6.fontSize" className="formText">
+                        Join a group by entering the Group Number
                     provided to you by the Group Admin here:
-                <Input placeholder="group number" />
-                <Button variant="outlined">Submit</Button>
+                    </Box>
+                </Typography>
+                <br />
+                <Container className={this.props.classes.joinGroup}>
+                    <Input placeholder="group number" />
+                    <br />
+                    <br />
+                    <Button variant="outlined">Join</Button>
+                
                 <p>Current Active Group: {this.props.profile[0].group_name}</p>
                 <p>Select group to view:</p>
                 {<GroupGenerator />}
+                </Container>
             </div>
         );
     }
@@ -65,4 +87,4 @@ const mapStateToProps = (reduxStore) => {
     }
 }
 
-export default connect(mapStateToProps)(EditProfile);
+export default connect(mapStateToProps)(withStyles(styles)(EditProfile));

@@ -105,6 +105,7 @@ class RestaurantDetails extends Component {
 
     deleteCommentClick = (id) => {
         console.log('id for delete comment payload is', id)
+        if (this.props.details.length > 1) {
         this.props.dispatch({
             type: 'DELETE_COMMENT',
             payload: {
@@ -117,6 +118,14 @@ class RestaurantDetails extends Component {
                 <h1>Comment deleted!</h1>
             </div>
         )
+        } else {
+            swal(
+                <div>
+                    <h1>You cannot delete the only comment, we need to know your thoughts!</h1>
+                </div>
+            )
+            return;
+        }
     }
 
     handleEditCommentChange = (event) => {

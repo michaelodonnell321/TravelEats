@@ -3,6 +3,15 @@ import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
+import {withStyles} from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
+const styles = {
+    addForm: {
+        padding: '10px',
+    }
+}
 
 class EditProfileForm extends Component {
 
@@ -64,10 +73,8 @@ class EditProfileForm extends Component {
     render() {
         return (
             <div>
-                <p>Edit Profile Information</p>
-                <br />
                 <div>
-                    <form onSubmit={this.handleFormSubmit}>
+                    <form onSubmit={this.handleFormSubmit} className={this.props.classes.addForm}>
                         <InputLabel htmlFor="text">Email Address</InputLabel>
                         <Input
                             value={this.state.currentUserInfo.email}
@@ -80,6 +87,8 @@ class EditProfileForm extends Component {
                         <Input
                             value={this.state.currentUserInfo.location}
                             onChange={(event) => this.handleChangeFor(event, 'location')} />
+                            <br />
+                            <br />
                         <Button variant="outlined" type="submit">Submit</Button>
                     </form>
                 </div>
@@ -95,4 +104,4 @@ const mapStateToProps = (reduxStore) => {
     }
 }
 
-export default connect(mapStateToProps)(EditProfileForm);
+export default connect(mapStateToProps)(withStyles(styles)(EditProfileForm));
