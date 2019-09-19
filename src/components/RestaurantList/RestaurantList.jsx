@@ -39,6 +39,18 @@ const styles = {
     listingImage: {
         width: 'auto',
         height: '250px'
+    },
+    noListings: {
+        backgroundImage: "url('/images/formbackground.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+        height: "750px",
+    },
+    noListingsText: {
+        margin: '10px',
+        textAlign: 'center'
     }
 };
 
@@ -66,11 +78,6 @@ class RestaurantList extends Component {
     }
 
     render() {
-        if (this.props.reduxStore.restaurantReducer.length === 0) {
-            return (
-            <p>No search results, try again!</p>
-            )
-        }
         let restaurantArray = this.props.reduxStore.restaurantReducer.map(restaurant => {
             return (
                 <Card className={this.props.classes.card}>
@@ -87,7 +94,7 @@ class RestaurantList extends Component {
                             <Typography variant="paragraph">
                                 <p>{restaurant.type}</p>
                                 {restaurant.address} {restaurant.city}, {restaurant.state} {restaurant.zip}
-                                <br/>
+                                <br />
                                 {restaurant.country}
                             </Typography>
                         </div>
@@ -95,6 +102,18 @@ class RestaurantList extends Component {
                 </Card>
             )
         })
+        if (restaurantArray.length === 0) {
+            return (
+                <div>
+                    <RestaurantSearch />
+                    <Container className={this.props.classes.noListings}>
+                        <Typography className={this.props.classes.noListingsText} variant="h5">
+                            There are no results in this city yet. Go out and explore and add some listings!
+                        </Typography>
+                    </Container>
+                </div>
+            )
+        }
         return (
             <div>
                 <Container className={this.props.classes.background}>
