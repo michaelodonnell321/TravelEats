@@ -4,8 +4,14 @@ import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import {withStyles} from '@material-ui/core/styles';
 
-
+const styles = {
+    headerBar: {
+        margin: '5px',
+        padding: '5px'
+    }
+}
 
 class EditProfileHeader extends Component {
 
@@ -33,7 +39,7 @@ class EditProfileHeader extends Component {
         return (
             <div>
                 <div>
-                    <Grid container alignItems={'center'} justify={'space-evenly'} spacing={2} >
+                    <Grid className={this.props.classes.headerBar} container alignItems={'center'} justify={'space-evenly'} spacing={2} >
                         <Grid item xs>
                             <Button variant="outlined" onClick={() => this.handleProfileClick(this.props.user.id)}>Edit Profile</Button>
                         </Grid>
@@ -67,4 +73,4 @@ const mapStateToProps = (reduxStore) => {
         profile: reduxStore.profilePageReducer,
     }
 }
-export default connect(mapStateToProps)(withRouter(EditProfileHeader));
+export default connect(mapStateToProps)(withStyles(styles)(withRouter(EditProfileHeader)));
