@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './RestaurantList.css'
 import RestaurantListHeader from '../RestaurantListHeader/RestaurantListHeader';
-import RestaurantTypeSelector from '../RestaurantTypeSelector/RestaurantTypeSelector';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -36,6 +35,9 @@ const styles = {
         backgroundAttachment: 'fixed',
         height: "100%",
     },
+    listingImage: {
+        width: '325px'
+    }
 };
 
 class RestaurantList extends Component {
@@ -76,7 +78,7 @@ class RestaurantList extends Component {
                                 title={restaurant.id}
                             />
                             <Typography variant="paragraph">
-                            <p>{restaurant.type}</p>
+                                <p>{restaurant.type}</p>
                                 {restaurant.address} {restaurant.city}, {restaurant.state} {restaurant.zip}
                             </Typography>
                         </div>
@@ -85,11 +87,12 @@ class RestaurantList extends Component {
             )
         })
         return (
-            <Container className={this.props.classes.background}>
+            <div>
+                <Container className={this.props.classes.background}>
                     <RestaurantListHeader />
-                    <RestaurantTypeSelector />
-                {restaurantArray}
-            </Container>
+                    {restaurantArray}
+                </Container>
+            </div>
         );
     }
 }
