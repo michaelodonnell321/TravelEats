@@ -113,37 +113,39 @@ class RestaurantForm extends Component {
                     <form style={{ width: "75%" }} className={this.props.classes.addForm} onSubmit={this.handleSubmit}>
                         <InputLabel htmlFor="text">Name</InputLabel>
                         <Input
-                        required
+                            required
+                            label="name"
                             value={this.state.newRestaurant.name}
                             onChange={(event) => this.handleChangeFor(event, 'name')} />
                         <InputLabel htmlFor="text">Address</InputLabel>
                         <Input
-                        required
+                            required
                             value={this.state.newRestaurant.address}
                             onChange={(event) => this.handleChangeFor(event, 'address')} />
                         <InputLabel htmlFor="text">City</InputLabel>
                         <Input
-                        required
+                            required
                             value={this.state.newRestaurant.city}
                             onChange={(event) => this.handleChangeFor(event, 'city')} />
                         <InputLabel htmlFor="text">State</InputLabel>
                         <Input
-                        required
+                            required
                             value={this.state.newRestaurant.state}
                             onChange={(event) => this.handleChangeFor(event, 'state')} />
                         <InputLabel htmlFor="text">Country</InputLabel>
                         <Input
-                        required
+                            required
                             value={this.state.newRestaurant.country}
                             onChange={(event) => this.handleChangeFor(event, 'country')} />
                         <InputLabel htmlFor="text">Zip</InputLabel>
                         <Input
-                        required
+                            required
                             value={this.state.newRestaurant.zip}
                             onChange={(event) => this.handleChangeFor(event, 'zip')} />
                         <InputLabel htmlFor="text">Comments</InputLabel>
                         <Input
-                        required
+                            required
+                            multiline
                             value={this.state.newRestaurant.comments}
                             onChange={(event) => this.handleChangeFor(event, 'comments')} />
                         <FormLabel component="legend"></FormLabel>

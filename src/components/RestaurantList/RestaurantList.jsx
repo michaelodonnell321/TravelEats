@@ -37,7 +37,8 @@ const styles = {
         height: "100%",
     },
     listingImage: {
-        width: '325px'
+        width: 'auto',
+        height: '250px'
     }
 };
 
@@ -79,7 +80,7 @@ class RestaurantList extends Component {
                                 {restaurant.name}
                             </Typography>
                             <CardMedia
-                                className="listingImage"
+                                className={this.props.classes.listingImage}
                                 image={restaurant.photo_url}
                                 title={restaurant.id}
                             />
