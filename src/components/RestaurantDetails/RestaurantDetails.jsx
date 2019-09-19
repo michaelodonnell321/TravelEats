@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import swal from '@sweetalert/with-react';
 import ClosedText from '../ClosedText/ClosedText';
 import Container from '@material-ui/core/Container';
+import BackToListings from '../BackToListings/BackToListings';
 
 //THIS IS THE DETAILS PAGE FOR EACH INDIVIDUAL RESTAURANT
 
@@ -24,6 +25,7 @@ const styles = {
         padding: '10px',
         backgroundColor: '#ffa726',
         opacity: '0.9',
+        margin: '8px'
     },
     listingImage: {
         width: '350',
@@ -235,9 +237,20 @@ class RestaurantDetails extends Component {
         console.log('restaurnat is', name);
         return (
             <div>
+
                 <Container className={this.props.classes.listing}>
                     <ClosedText />
                     <Container className={this.props.classes.commentArea}>
+                        <div>
+                            <Container className={this.props.classes.link}>
+                                <div>
+                                    <Button
+                                        variant="outlined"
+                                        onClick={() => { this.props.history.push('/list') }}
+                                    >Back to Listings</Button>
+                                </div>
+                            </Container>
+                        </div>
                         {restaurantArray}
                     </Container>
                     <Container className={this.props.classes.commentArea}>

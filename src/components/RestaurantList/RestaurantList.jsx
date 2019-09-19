@@ -65,6 +65,11 @@ class RestaurantList extends Component {
     }
 
     render() {
+        if (this.props.reduxStore.restaurantReducer.length === 0) {
+            return (
+            <p>No search results, try again!</p>
+            )
+        }
         let restaurantArray = this.props.reduxStore.restaurantReducer.map(restaurant => {
             return (
                 <Card className={this.props.classes.card}>

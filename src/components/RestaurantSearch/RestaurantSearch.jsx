@@ -4,14 +4,23 @@ import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
+import swal from '@sweetalert/with-react';
 
 
 class RestaurantSearch extends Component {
     state={
         searchText: ''
     }
-
+    
     handleSearchClick = () => {
+        if (this.state.searchText === '') {
+            swal (
+                <h1>
+                    Please enter a city to search for!
+                </h1>
+            )
+            return;
+        }
         console.log('search clicked');
         let searchText = this.state.searchText.toLowerCase();
         this.props.dispatch({
