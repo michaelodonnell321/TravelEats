@@ -5,6 +5,16 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
 import swal from '@sweetalert/with-react';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = {
+    searchBar: {
+        color: 'black',
+        backgroundColor: '#ffa726',
+        opacity: '.8',
+        margin: '5px'
+    }
+}
 
 
 class RestaurantSearch extends Component {
@@ -38,7 +48,9 @@ class RestaurantSearch extends Component {
     render() {
         return (
             <div>
-                <TextField label="Search by City"
+                <TextField
+                className={this.props.classes.searchBar}
+                label="Search by City"
                 onChange={(event) => this.handleChange(event)}
                 InputProps={{
                     endAdornment: (
@@ -55,4 +67,4 @@ class RestaurantSearch extends Component {
     }
 }
 
-export default connect()(RestaurantSearch);
+export default connect()(withStyles(styles)(RestaurantSearch));
