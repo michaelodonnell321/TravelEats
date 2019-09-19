@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import Container from '@material-ui/core/Container';
+import RestaurantSearch from '../RestaurantSearch/RestaurantSearch';
 
 const styles = {
     card: {
@@ -80,6 +81,8 @@ class RestaurantList extends Component {
                             <Typography variant="paragraph">
                                 <p>{restaurant.type}</p>
                                 {restaurant.address} {restaurant.city}, {restaurant.state} {restaurant.zip}
+                                <br/>
+                                {restaurant.country}
                             </Typography>
                         </div>
                     </CardContent>
@@ -90,6 +93,7 @@ class RestaurantList extends Component {
             <div>
                 <Container className={this.props.classes.background}>
                     <RestaurantListHeader />
+                    <RestaurantSearch />
                     {restaurantArray}
                 </Container>
             </div>

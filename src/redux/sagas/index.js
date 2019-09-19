@@ -8,6 +8,7 @@ import comments from './commentSaga';
 import groups from './groupSaga';
 import profile from './profile';
 import adminSaga from './adminSaga';
+import search from './search';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     groups(),
     profile(),
     adminSaga(),
+    search(),
   ]);
 }

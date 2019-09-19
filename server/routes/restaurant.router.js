@@ -6,6 +6,21 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * GET route template
  */
+router.get('/search/:id', rejectUnauthenticated, (req, res) => {
+    console.log('search req.params is', req.params)
+    let searchCity = req.params.id
+    let queryText = `
+    SELECT * FROM "restaurants"
+    WHERE lower("city") = $1;
+    `;
+    pool.query(queryText, [searchCity])
+        .then(result => res.send(result.rows))
+        .catch(error => {
+            console.log('error in restaurant search get', error);
+            res.sendStatus(500);
+        })
+})
+ 
 router.get('/', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM "restaurants";
 `;
