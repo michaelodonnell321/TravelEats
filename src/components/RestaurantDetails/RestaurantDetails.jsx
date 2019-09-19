@@ -24,6 +24,9 @@ const styles = {
         padding: '10px',
         backgroundColor: '#ffa726',
         opacity: '0.9',
+    },
+    listingImage: {
+        width: '350',
     }
 
 }
@@ -201,9 +204,9 @@ class RestaurantDetails extends Component {
                 <p>{this.props.details[0].type}</p>
                 <div>
                     {this.props.details[0].closed ? (
-                        <img className="listingImage" alt="closed" src={`/images/closed.jpg`} />
+                        <img className={this.props.classes.listingImage} alt="closed" src={`/images/closed.jpg`} />
                     ) : (
-                            <img className="listingImage" alt={this.props.details[0].id} src={this.props.details[0].photo_url} />
+                            <img className={this.props.classes.listingImage} alt={this.props.details[0].id} src={this.props.details[0].photo_url} />
                         )}
                     <p>{this.props.details[0].address} {this.props.details[0].city}, {this.props.details[0].state} {this.props.details[0].zip}
                     </p>

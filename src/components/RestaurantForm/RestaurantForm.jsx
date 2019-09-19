@@ -28,15 +28,13 @@ const styles = {
         padding: '10px',
         backgroundColor: '#ffa726',
         opacity: '0.9',
+        color: 'black'
+    },
+    radioValues: {
+        color: 'black',
     }
 }
-//ADD A RESTAURANT FORM
-// const styles = theme => ({
-//     formControl: {
-//         margin: theme.spacing.unit,
-//         midWidth:100
-//     }
-// })
+
 class RestaurantForm extends Component {
     state = {
         newRestaurant: {
@@ -48,7 +46,8 @@ class RestaurantForm extends Component {
             country: '',
             zip: '',
             comments: '',
-            recommended: false
+            recommended: true,
+            type: 'American'
         }
     }
     //this handles the changes for the whole form,
@@ -61,10 +60,17 @@ class RestaurantForm extends Component {
             }
         });
     }
+
     //submits new restaurant from local state to redux
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('form submitted');
+
+        this.props.dispatch({
+            type: 'ADD_RESTAURANT',
+            payload: this.state.newRestaurant
+        })
+
         this.setState({
             newRestaurant: {
                 name: '',
@@ -80,28 +86,17 @@ class RestaurantForm extends Component {
 
             }
         })
-        this.props.dispatch({
-            type: 'ADD_RESTAURANT',
-            payload: this.state.newRestaurant
-        })
         swal(
             <div>
                 <h1>Restaurant submitted successfully!</h1>
-            </div>
+            </div >
         )
     }
-
-    // handleCusineChange = (event) => {
-    //     console.log('seleted cuisine is ', event.target.value)
-    //     this.setState({
-    //         newRestaurant = { ...newRestaurant, type: event.garget.value}
-    //     })
-    // }
 
     render() {
 
         return (
-            <Container className ={this.props.classes.background}>
+            <Container className={this.props.classes.background}>
                 <div className="formDiv">
                     <Typography component="div">
                         <Box textAlign="center" fontSize="h3.fontSize" className="formName">Add a Restaurant
@@ -118,47 +113,48 @@ class RestaurantForm extends Component {
                     <form style={{ width: "75%" }} className={this.props.classes.addForm} onSubmit={this.handleSubmit}>
                         <InputLabel htmlFor="text">Name</InputLabel>
                         <Input
+                        required
                             value={this.state.newRestaurant.name}
                             onChange={(event) => this.handleChangeFor(event, 'name')} />
                         <InputLabel htmlFor="text">Address</InputLabel>
                         <Input
+                        required
                             value={this.state.newRestaurant.address}
                             onChange={(event) => this.handleChangeFor(event, 'address')} />
                         <InputLabel htmlFor="text">City</InputLabel>
                         <Input
+                        required
                             value={this.state.newRestaurant.city}
                             onChange={(event) => this.handleChangeFor(event, 'city')} />
                         <InputLabel htmlFor="text">State</InputLabel>
                         <Input
+                        required
                             value={this.state.newRestaurant.state}
                             onChange={(event) => this.handleChangeFor(event, 'state')} />
                         <InputLabel htmlFor="text">Country</InputLabel>
                         <Input
+                        required
                             value={this.state.newRestaurant.country}
                             onChange={(event) => this.handleChangeFor(event, 'country')} />
                         <InputLabel htmlFor="text">Zip</InputLabel>
                         <Input
+                        required
                             value={this.state.newRestaurant.zip}
                             onChange={(event) => this.handleChangeFor(event, 'zip')} />
                         <InputLabel htmlFor="text">Comments</InputLabel>
                         <Input
+                        required
                             value={this.state.newRestaurant.comments}
                             onChange={(event) => this.handleChangeFor(event, 'comments')} />
                         <FormLabel component="legend"></FormLabel>
                         <RadioGroup label="Recommended?" name="recommended" value={this.props.selectedRadio} onChange={(event) => this.handleChangeFor(event, 'recommended')}>
-                            {/* <InputLabel>
-                                Recommended
-                                </InputLabel> */}
-                            <FormControlLabel value="recommended" control={<Radio />} label="Recommended" />
-                            {/* <InputLabel>
-                                Not Recommended
-                                </InputLabel> */}
-                            <FormControlLabel value="notRecommended" control={<Radio />} label="Not Recommended" />
+                            <FormControlLabel className={this.props.classes.radioValues} value="recommended" control={<Radio />} label="Recommended" />
+                            <FormControlLabel className={this.props.classes.radioValues} value="notRecommended" control={<Radio />} label="Not Recommended" />
                         </RadioGroup>
                         <InputLabel>
                             Select cusine type:
                             </InputLabel>
-                        <Select value={this.state.newRestaurant.type} onChange={(event) => this.handleChangeFor(event, 'type')}>
+                        <Select required value={this.state.newRestaurant.type} onChange={(event) => this.handleChangeFor(event, 'type')}>
                             <option value="American">American</option>
                             <option value="Bbq">BBQ</option>
                             <option value="British">British</option>

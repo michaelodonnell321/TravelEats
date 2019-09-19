@@ -25,19 +25,16 @@ const Nav = (props) => (
             Listings
           </Link>
           <Link className="nav-link" to="/add">
-            Add
+            Add Listing
           </Link>
           <Link className="nav-link" to="/info">
             Info Page
           </Link>
-          <Link className="nav-link" to="/about">
-            About
-      </Link>
           <LogOutButton className="nav-link"/>
         </>
       )}
       {/* Always show this link since the about page is not protected */}
-      
+      <br/>
     </div>
   </div>
 );
