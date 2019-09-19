@@ -28,7 +28,8 @@ const styles = {
         margin: '8px'
     },
     listingImage: {
-        width: '350',
+        width: '350px',
+        height: '200px'
     }
 
 }
@@ -180,7 +181,7 @@ class RestaurantDetails extends Component {
             return (
                 <div>
                     <div className="commentList" key={comment.comment_id}>
-                        <p>{comment.username} says: {comment.recommended}</p>
+                        <p>{comment.username} says: {comment.recommended ?  (<p>Recommended</p>) : (<p>Not Recommended</p>)}</p>
                         <p>{comment.comment}</p>
                     </div>
                     <div>
