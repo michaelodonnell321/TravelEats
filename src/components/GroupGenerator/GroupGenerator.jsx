@@ -5,11 +5,8 @@ import Button from '@material-ui/core/Button';
 
 
 class GroupGenerator extends Component {
-    componentDidMount() {
-    console.log('props are', this.props);
-    }
     
-
+    //changes what group a user is actively in on click
     handleGroupClick = (name) => {
         console.log('clicked name', name);
         console.log('id of click', this.props.user.id)
@@ -25,6 +22,7 @@ class GroupGenerator extends Component {
     render() {
         return (
             <div>
+                {/* maps over array from reducer to generate all groups user is a memeber of */}
                 {this.props.group.map(group => {
                     return (
                         <div>

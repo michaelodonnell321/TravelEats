@@ -22,14 +22,14 @@ class EditProfile extends Component {
         this.getGroups();
         this.getActiveGroup();
     }
-
+    //gets group that user is currently active in
     getActiveGroup = () => {
         this.props.dispatch({
             type: 'FETCH_ACTIVE_GROUP',
             payload: this.props.user.id
         })
     }
-
+    //gets all groups user is a part of
     getGroups = () => {
         this.props.dispatch({
             type: 'FETCH_ALL_GROUPS'
@@ -38,7 +38,7 @@ class EditProfile extends Component {
     backClick = () => {
         this.props.history.push('/list')
     }
-
+    
     handleAdminClick = (id) => {
         this.props.dispatch({
             type: 'GET_ADMIN_GROUP_INFO',

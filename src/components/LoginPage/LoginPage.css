@@ -1,9 +1,0 @@
-.mainBody {
-    background-image: url("/images/loginbackground.jpg");
-    height: -webkit-fill-available;
-    background-size: cover;
-    height: 100%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './LoginPage.css';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Input from '@material-ui/core/Input';
 
 const styles = {
   background: {
@@ -11,12 +11,20 @@ const styles = {
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
-    height: "100%",
+    height: '725px',
   },
   addForm: {
     padding: '10px',
     backgroundColor: '#ffa726',
     opacity: '0.9',
+    paddingTop: '30px',
+    opacity: '.8'
+  },
+  inputText: {
+    color: 'black',
+  },
+  buttons: {
+    backgroundColor: 'grey',
   }
 }
 class LoginPage extends Component {
@@ -50,58 +58,61 @@ class LoginPage extends Component {
   render() {
     return (
       <Container className={this.props.classes.background}>
-      <div className={this.props.classes.addForm}>
-        {this.props.errors.loginMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
-            {this.props.errors.loginMessage}
-          </h2>
-        )}
-        <form onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
+        <div className={this.props.classes.addForm}>
+          {this.props.errors.loginMessage && (
+            <h2
+              className="alert"
+              role="alert"
+            >
+              {this.props.errors.loginMessage}
+            </h2>
+          )}
+          <form onSubmit={this.login}>
+            <h1>Login</h1>
+            <div>
+              <label htmlFor="username" className={this.props.classes.inputText}>
+                Username:
+              <Input
+                  className={this.props.classes.input}
+                  type="text"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.handleInputChangeFor('username')}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="password" className={this.props.classes.inputText}>
+                Password:
+              <Input
+                  className={this.props.classes.input}
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleInputChangeFor('password')}
+                />
+              </label>
+            </div>
+            <div>
               <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
+                className="log-in"
+                type="submit"
+                name="submit"
+                value="Log In"
+                className={this.props.classes.buttons}
               />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              className="log-in"
-              type="submit"
-              name="submit"
-              value="Log In"
-            />
-          </div>
-        </form>
-        <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
-          >
-            Register
+            </div>
+          </form>
+          <center>
+            <button
+              type="button"
+              className={this.props.classes.buttons}
+              onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
+            >
+              Register
           </button>
-        </center>
-      </div>
+          </center>
+        </div>
       </Container>
     );
   }

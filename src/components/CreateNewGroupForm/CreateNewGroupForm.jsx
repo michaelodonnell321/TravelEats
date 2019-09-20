@@ -5,6 +5,7 @@ import { Input } from '@material-ui/core';
 import swal from '@sweetalert/with-react';
 import Button from '@material-ui/core/Button';
 
+//form to handle creation of a new group
 
 class CreateNewGroupForm extends Component {
     state = {
@@ -13,7 +14,7 @@ class CreateNewGroupForm extends Component {
             newGroupID: '',
         }
     }
-
+    //handles change for all form properties
     handleChangeFor = (event, propertyName) => {
         this.setState({
             newGroup: {
@@ -22,7 +23,7 @@ class CreateNewGroupForm extends Component {
             }
         })
     }
-
+    //handles submission of form
     handleFormSubmit = (event) => {
         event.preventDefault();
         console.log('form submitted');
@@ -39,6 +40,7 @@ class CreateNewGroupForm extends Component {
                 adminID: this.props.user.id
             }
         })
+        //sweet alert to let user know group has been submitted
         swal(
             <div>
                 <h1>Group submitted successfully!</h1>

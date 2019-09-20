@@ -93,13 +93,29 @@ class RestaurantForm extends Component {
         )
     }
 
+    demoClick = () => {
+        this.setState({
+            newRestaurant: {
+                name: 'The Handsome Hog',
+                address: '203 6th St E',
+                city: 'St Paul',
+                state: 'MN',
+                country: 'United States',
+                zip: '55101',
+                comments: 'Incredible BBQ, great atmosphere. Bourbon and smoke, what more could you need?',
+                recommended: true,
+                type: 'BBQ'
+            }
+        })
+    }
+
     render() {
 
         return (
             <Container className={this.props.classes.background}>
                 <div className="formDiv">
                     <Typography component="div">
-                        <Box textAlign="center" fontSize="h3.fontSize" className="formName">Add a Restaurant
+                        <Box onClick={this.demoClick()} textAlign="center" fontSize="h3.fontSize" className="formName">Add a Restaurant
                     </Box>
                     </Typography>
                 </div>

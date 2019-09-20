@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+//creates CLOSED text on details page when restaurant is marked closed
+
 class ClosedText extends Component {
     render() {
         return (

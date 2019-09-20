@@ -30,7 +30,7 @@ class EditProfileForm extends Component {
         this.getProfileInfo();
         console.log('state is', this.state)
     }
-
+    //gets all profile info for user
     getProfileInfo = () => {
         this.props.dispatch({
             type: 'GET_PROFILE_INFO',
@@ -45,7 +45,7 @@ class EditProfileForm extends Component {
         })
         console.log('state after get profile info', this.state)
     }
-
+    //handles changes for all properties on form
     handleChangeFor = (event, propertyName) => {
         this.setState({
             updatedUserInfo: {
@@ -54,7 +54,7 @@ class EditProfileForm extends Component {
             }
         });
     }
-
+    //handles submission of form to redux
     handleFormSubmit = (event) => {
         event.preventDefault();
         console.log('form submitted');
