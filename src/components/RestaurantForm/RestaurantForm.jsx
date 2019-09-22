@@ -68,7 +68,10 @@ class RestaurantForm extends Component {
 
         this.props.dispatch({
             type: 'ADD_RESTAURANT',
-            payload: this.state.newRestaurant
+            payload: {
+                newRestaurant: this.state.newRestaurant,
+                activeGroup: this.props.user.active_group_id
+            }
         })
 
         this.setState({
@@ -115,7 +118,7 @@ class RestaurantForm extends Component {
             <Container className={this.props.classes.background}>
                 <div className="formDiv">
                     <Typography component="div">
-                        <Box onClick={this.demoClick()} textAlign="center" fontSize="h3.fontSize" className="formName">Add a Restaurant
+                        <Box onClick={() => this.demoClick()} textAlign="center" fontSize="h3.fontSize" className="formName">Add a Restaurant
                     </Box>
                     </Typography>
                 </div>
@@ -205,4 +208,9 @@ class RestaurantForm extends Component {
     }
 }
 
-export default connect()(withStyles(styles)(RestaurantForm));
+const mapStateToProps = (reduxStore) => {
+    return {
+        user: reduxStore.user
+    }
+}
+export default connect(mapStateToProps)(withStyles(styles)(RestaurantForm));

@@ -62,9 +62,12 @@ class RestaurantList extends Component {
     }
 
     getRestaurants = () => {
-        this.props.dispatch({
-            type: 'FETCH_RESTAURANTS'
-        })
+        if (this.props.user.active_group_id) {
+            this.props.dispatch({
+                type: 'FETCH_RESTAURANTS',
+                payload: this.props.user.active_group_id
+            })
+        }
     }
 
     restaurantClickHandler = (id) => {
@@ -102,10 +105,10 @@ class RestaurantList extends Component {
                 </Card>
             )
         })
-        if (restaurantArray.length === 0) {
+        console.log(this.props.user.active_group_id)
+        if (restaurantArray.length === 0 && this.props.user.active_group_id != null) {
             return (
                 <div>
-                    <RestaurantSearch />
                     <Container className={this.props.classes.noListings}>
                         <Typography className={this.props.classes.noListingsText} variant="h5">
                             There are no results in this city yet. Go out and explore and add some listings!
@@ -118,7 +121,7 @@ class RestaurantList extends Component {
             <div>
                 <Container className={this.props.classes.background}>
                     <RestaurantListHeader />
-                    <RestaurantSearch />
+                    {this.props.user.active_group_id != null && <RestaurantSearch />}
                     {restaurantArray}
                 </Container>
             </div>
@@ -128,7 +131,8 @@ class RestaurantList extends Component {
 
 const mapStateToProps = (reduxStore) => {
     return {
-        reduxStore
+        reduxStore,
+        user: reduxStore.user
     }
 }
 export default connect(mapStateToProps)(withStyles(styles)(RestaurantList));

@@ -21,10 +21,14 @@ router.get('/search/:id', rejectUnauthenticated, (req, res) => {
         })
 })
  
-router.get('/', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT * FROM "restaurants";
+router.get('/list/:id', rejectUnauthenticated, (req, res) => {
+    let activeGroupID = req.params.id
+    console.log('active group id is', activeGroupID);
+    let queryText = `
+    SELECT * FROM "restaurants"
+    WHERE "what_group_id" = $1;
 `;
-    pool.query(queryText)
+    pool.query(queryText, [activeGroupID])
         .then(result => res.send(result.rows))
         .catch(error => {
             console.log('error in restaurant get', error);
@@ -95,23 +99,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     //checks user authentication and logs user
     console.log('is authenticated?', req.isAuthenticated());
     console.log('user', req.user);
-    if (req.body.recommended === "recommended") {
+    console.log('recommended?', req.body.newRestaurant.recommended)
+    if (req.body.newRestaurant.recommended === "recommended") {
         recommendedBoolean = true
-    } else if (req.body.recommended === "notRecommended") {
+    } else if (req.body.newRestaurant.recommended === "notRecommended") {
         recommendedBoolean = false
     }
-    let photoQuery = `images/${req.body.type}.jpg`;
+    let photoQuery = `images/${req.body.newRestaurant.type}.jpg`;
     console.log('the photo is', photoQuery);
     let queryText = `
     WITH rows AS (
-    INSERT into "restaurants" ("name", "type", "user_id", "address", "city", "state", "zip", "country", "photo_url")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    INSERT into "restaurants" ("name", "type", "user_id", "address", "city", "state", "zip", "country", "photo_url", "what_group_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $13)
     RETURNING id as new_restaurant_id)
     INSERT into "comments" ("user_id", "restaurant_id", "comment", "recommended")
     VALUES ($10, (SELECT new_restaurant_id FROM rows), $11, $12);
     `;
-    pool.query(queryText, [req.body.name, req.body.type, req.user.id, req.body.address, req.body.city, req.body.state, req.body.zip,
-    req.body.country, photoQuery, req.user.id, req.body.comments, recommendedBoolean ])
+    pool.query(queryText, [req.body.newRestaurant.name, req.body.newRestaurant.type, req.user.id, req.body.newRestaurant.address, req.body.newRestaurant.city, req.body.newRestaurant.state, req.body.newRestaurant.zip,
+        req.body.newRestaurant.country, photoQuery, req.user.id, req.body.newRestaurant.comments, recommendedBoolean, req.body.activeGroup ])
     .then(() => {
         res.sendStatus(200);
     })
