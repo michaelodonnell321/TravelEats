@@ -16,10 +16,11 @@ function* addRestaurant(action) {
 }
 
 function* fetchRestaurants(action) {
+    let activeGroupID = action.payload
     try {
         console.log('in fetch restaurants')
         //fetches list of restaurants user should see
-        const response = yield axios.get('/api/restaurant')
+        const response = yield axios.get(`/api/restaurant/list/${activeGroupID}`)
         yield put ({
             type: 'SET_RESTAURANTS',
             payload: response.data

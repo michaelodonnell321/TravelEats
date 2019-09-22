@@ -38,7 +38,7 @@ class EditProfile extends Component {
     backClick = () => {
         this.props.history.push('/list')
     }
-    
+
     handleAdminClick = (id) => {
         this.props.dispatch({
             type: 'GET_ADMIN_GROUP_INFO',
@@ -69,7 +69,9 @@ class EditProfile extends Component {
                     <br />
                     <Button variant="outlined">Join</Button>
                 
-                <p>Current Active Group: {this.props.profile[0].group_name}</p>
+                <p>Current Active Group: 
+                {this.props.profile[0] ? (this.props.profile[0].group_name) :
+                (<p>None</p>)}</p>
                 <p>Select group to view:</p>
                 {<GroupGenerator />}
                 </Container>
