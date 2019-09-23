@@ -14,6 +14,7 @@ const styles = {
     height: '725px',
   },
   addForm: {
+    margin: '10px',
     padding: '10px',
     backgroundColor: '#ffa726',
     opacity: '0.9',
@@ -94,6 +95,7 @@ class LoginPage extends Component {
               </label>
             </div>
             <div>
+              <center>
               <input
                 className="log-in"
                 type="submit"
@@ -101,6 +103,7 @@ class LoginPage extends Component {
                 value="Log In"
                 className={this.props.classes.buttons}
               />
+              </center>
             </div>
           </form>
           <center>
