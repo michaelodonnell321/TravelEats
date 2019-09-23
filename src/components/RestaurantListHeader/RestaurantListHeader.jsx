@@ -57,7 +57,9 @@ class EditProfileHeader extends Component {
                         <Box textAlign="center" fontSize="h6.fontSize">Your current active group is: 
                         {this.props.group[0] ? (
                         this.props.group[0].group_name ) : (
-                            <p>None! Click on Edit Profile to join a Group with the Group ID your Group Administrator provided!</p>
+                            <p>None! Click on Edit Profile to join a Group with the Group ID your Group Administrator provided!
+                            <Button onClick={() => this.handleProfileClick(this.props.user.id)} variant="outlined">Edit Profile</Button></p>
+                                            
                         )}
                         </Box>
                             </Grid>

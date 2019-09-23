@@ -11,7 +11,7 @@ const styles = {
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
-    height: "100%",
+    height: "600px",
   },
   infoText: {
     backgroundColor: '#ffa726',
@@ -38,26 +38,10 @@ class InfoPage extends Component {
           </div>
           <p className={this.props.classes.infoText}>
             TravelEats is a travel journal and restaurant listing service for groups to use to be able to share memories and
-            restaurant recommendations with each other, no matter where in the world (or beyond!) their travles may take them.
+            restaurant recommendations with each other, no matter where in the world (or beyond!) their travels may take them.
         <br />
             Bon Voyage!
           </p>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
         </Container>
       </div>
     )
