@@ -1,3 +1,5 @@
+# TravelEats
+
 ## Description
 
 Project Duration: 2 Week Sprint
