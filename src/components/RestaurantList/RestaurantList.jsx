@@ -51,6 +51,9 @@ const styles = {
     noListingsText: {
         margin: '10px',
         textAlign: 'center'
+    },
+    cuisineTypeText: {
+        textTransform: 'capitalize',
     }
 };
 
@@ -95,7 +98,7 @@ class RestaurantList extends Component {
                                 title={restaurant.id}
                             />
                             <Typography variant="paragraph">
-                                <p>{restaurant.type}</p>
+                                <p className={this.props.classes.cuisineTypeText}>{restaurant.type}</p>
                                 {restaurant.address} {restaurant.city}, {restaurant.state} {restaurant.zip}
                                 <br />
                                 {restaurant.country}
