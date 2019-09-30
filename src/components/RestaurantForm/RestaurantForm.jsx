@@ -177,7 +177,7 @@ class RestaurantForm extends Component {
                             </InputLabel>
                         <Select required value={this.state.newRestaurant.type} onChange={(event) => this.handleChangeFor(event, 'type')}>
                             <option value="American">American</option>
-                            <option value="Bbq">BBQ</option>
+                            <option value="BBQ">BBQ</option>
                             <option value="British">British</option>
                             <option value="Central American">Central American</option>
                             <option value="Chinese">Chinese</option>
