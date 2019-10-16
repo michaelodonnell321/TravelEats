@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Input from '@material-ui/core/Input';
+import FrontScreenWelcome from '../FrontScreenWelcome/FrontScreenWelcome';
 
 const styles = {
   background: {
@@ -115,6 +116,9 @@ class LoginPage extends Component {
               Register
           </button>
           </center>
+        </div>
+        <div>
+        <FrontScreenWelcome />
         </div>
       </Container>
     );
